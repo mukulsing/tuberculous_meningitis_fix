@@ -1,0 +1,54 @@
+name: Build & Test TBM Predictor
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python deps
+        run: pip install -r backend/requirements.txt
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Build React frontend
+        run: |
+          cd frontend
+          npm install
+          npm run build
+
+      - name: Test Flask health endpoint
+        run: |
+          cd backend
+          python -c "
+          import app_production as a
+          c = a.app.test_client()
+          r = c.get('/health')
+          print('Health check:', r.get_json())
+          assert r.status_code == 200
+          print('✅ All tests passed!')
+          "
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: tbm-predictor-build
+          path: |
+            backend/
+            frontend/build/
+            Procfile
+            render.yaml
