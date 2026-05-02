@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: tbm-predictor
+    env: python
+    region: oregon
+    plan: free
+    buildCommand: pip install -r backend/requirements.txt && cd frontend && npm install && npm run build
+    startCommand: cd backend && gunicorn app_production:app --bind 0.0.0.0:$PORT --workers 2 --timeout 120
+    healthCheckPath: /health
