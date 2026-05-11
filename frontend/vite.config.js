@@ -3,14 +3,4 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  server: {
-    proxy: {
-      '/predict': 'http://localhost:5000',
-      '/health':  'http://localhost:5000',
-      '/meta':    'http://localhost:5000',
-    }
-  },
-  build: {
-    outDir: 'build'
-  }
 })

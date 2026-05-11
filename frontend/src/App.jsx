@@ -1,3 +1,9 @@
+import API from "./api";
+
+const testBackend = async () => {
+  const res = await API.get("/health");
+  console.log(res.data);
+};
 import React, { useState, useCallback } from 'react';
 import axios from 'axios';
 import { RadialBarChart, RadialBar, PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
