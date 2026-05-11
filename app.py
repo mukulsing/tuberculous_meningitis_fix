@@ -73,6 +73,14 @@ def build_row(data):
     df_row[CAT_COLS] = cat_imp.transform(df_row[CAT_COLS])
     return scaler.transform(df_row[FEATURE_ORDER])
 
+@app.route('/', methods=['GET'])
+def home():
+    return jsonify({
+        'message': 'TBM Mortality Prediction API is running successfully'
+    })
+
+
+
 @app.route('/health', methods=['GET'])
 def health():
     return jsonify({'status':'ok','model':'Gradient Boosting','accuracy':0.875,'auc':0.893})
@@ -104,4 +112,5 @@ def get_meta():
     return jsonify({'top_features': meta['top_features'], 'le_classes': LE_CLASSES})
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
