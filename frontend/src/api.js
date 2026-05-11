@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://your-backend-url.onrender.com",
+  baseURL: "https://tuberculous-meningitis-fix.onrender.com/",
 });
 
 export default API;
