@@ -1,8 +1,0 @@
-{
-  "name": "tbm-predictor-root",
-  "version": "1.0.0",
-  "scripts": {
-    "build": "cd frontend && npm install && npm run build",
-    "start": "cd backend && gunicorn app:app --bind 0.0.0.0:$PORT"
-  }
-}
