@@ -288,7 +288,10 @@ export default function App() {
     setError('');
     setLoading(true);
     try {
-      const { data } = await axios.post(`${API_BASE}/predict`, form);
+      const { data } = await axios.post(
+  `${API_BASE}/predict`,
+  form
+  );
       setResult(data);
       setStep(1);
     } catch (e) {
