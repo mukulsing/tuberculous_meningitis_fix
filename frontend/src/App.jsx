@@ -1,15 +1,9 @@
-import API from "./api";
-
-const testBackend = async () => {
-  const res = await API.get("/health");
-  console.log(res.data);
-};
 import React, { useState, useCallback } from 'react';
 import axios from 'axios';
 import { RadialBarChart, RadialBar, PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 
-// ─── API base (env or same-origin) ──────────────────────────────────────────
-const API = process.env.REACT_APP_API_URL || '';
+// API base URL
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 // ─── Color helpers ───────────────────────────────────────────────────────────
 const riskColor = r => r === 'High' ? '#ef4444' : r === 'Moderate' ? '#f59e0b' : '#10b981';
@@ -279,7 +273,7 @@ export default function App() {
     setError('');
     setLoading(true);
     try {
-      const { data } = await axios.post(`${API}/predict`, form);
+      const { data } = await axios.post(`${API_BASE}/predict`, form);
       setResult(data);
       setStep(1);
     } catch (e) {
