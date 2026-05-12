@@ -1,12 +1,27 @@
 import React, { useState, useCallback } from 'react';
 import axios from 'axios';
-import { RadialBarChart, RadialBar, PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 
-// API base URL
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+import {
+  RadialBarChart,
+  RadialBar,
+  PieChart,
+  Pie,
+  Cell,
+  ResponsiveContainer,
+  Tooltip
+} from 'recharts';
 
-// ─── Color helpers ───────────────────────────────────────────────────────────
-const riskColor = r => r === 'High' ? '#ef4444' : r === 'Moderate' ? '#f59e0b' : '#10b981';
+// Backend API URL
+const API_BASE =
+  import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
+// Color helpers
+const riskColor = r =>
+  r === 'High'
+    ? '#ef4444'
+    : r === 'Moderate'
+    ? '#f59e0b'
+    : '#10b981';
 
 // ─── Shared UI components ────────────────────────────────────────────────────
 const Section = ({ title, icon, children, color = '#3b82f6' }) => (
