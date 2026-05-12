@@ -14,3 +14,8 @@ if __name__ == '__main__':
         host='0.0.0.0',
         port=port
     )
+@app.route('/')
+def home():
+    return jsonify({
+        "message": "TBM Backend API Running Successfully"
+    })
